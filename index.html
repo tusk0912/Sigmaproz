@@ -1,227 +1,631 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Health Hub | Trạm Sức Khỏe Gen Z</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary: #3a7bd5;
-            --mint: #2af598;
-            --medical-grad: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            --bg-light: #f8fafc;
-            --text-dark: #2d3436;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SchoolHealth — Phòng Y Tế Học Đường</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --primary:#0077cc;
+  --primary-light:#3399ee;
+  --primary-pale:#e8f4fd;
+  --accent:#e8003d;
+  --teal:#00b4a0;
+  --bg:#f0f6ff;
+  --bg2:#ffffff;
+  --border:#d0e4f5;
+  --text:#0d2340;
+  --muted:#5a7fa0;
+  --muted2:#9ab5cc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 80% 10%,rgba(0,119,204,.07) 0%,transparent 50%),
+             radial-gradient(circle at 10% 80%,rgba(0,180,160,.06) 0%,transparent 50%)}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        
-        body { background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
+.page{display:none;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: absolute; width: 100%; padding: 30px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-        }
-        .logo { font-weight: 800; font-size: 1.5rem; color: white; display: flex; align-items: center; gap: 10px; }
-        .logo i { color: var(--mint); }
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 52px;background:rgba(255,255,255,.93);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+  box-shadow:0 2px 20px rgba(0,119,204,.07)}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
+  color:var(--primary);display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--primary),var(--teal));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  box-shadow:0 4px 14px rgba(0,119,204,.3)}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;
+  cursor:pointer;padding-bottom:3px;border-bottom:2px solid transparent;transition:all .2s}
+.nav-links a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff;padding:10px 24px;border-radius:100px;
+  font-weight:600;font-size:.88rem;cursor:pointer;border:none;
+  font-family:'DM Sans',sans-serif;box-shadow:0 4px 16px rgba(0,119,204,.3);
+  transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,119,204,.4)}
 
-        /* --- PHẦN 1: GIỚI THIỆU (HERO) --- */
-        .hero {
-            height: 90vh;
-            background: var(--medical-grad);
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; color: white;
-            border-radius: 0 0 80px 80px;
-            padding: 20px;
-            position: relative;
-        }
-        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero-tag { background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; backdrop-filter: blur(10px); font-weight: 600; margin-bottom: 15px; display: inline-block; }
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:120px 52px 80px;overflow:hidden;
+  background:linear-gradient(135deg,#e8f4ff 0%,#f5f9ff 55%,#eaf7f5 100%)}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17 8h6v9h9v6h-9v9h-6v-9H8v-6h9z' fill='%230077cc' fill-opacity='0.04'/%3E%3C/svg%3E");
+  background-size:60px 60px}
+.hblob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.hb1{width:520px;height:520px;background:rgba(0,119,204,.1);top:-100px;right:-80px;animation:bf 10s ease-in-out infinite}
+.hb2{width:320px;height:320px;background:rgba(0,180,160,.08);bottom:-50px;left:80px;animation:bf 13s ease-in-out infinite reverse}
+.hb3{width:200px;height:200px;background:rgba(232,0,61,.06);top:200px;right:35%;animation:bf 8s ease-in-out infinite 2s}
+@keyframes bf{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-20px)}}
 
-        /* --- PHẦN 2: DỊCH VỤ --- */
-        .services { padding: 100px 8%; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; color: var(--primary); margin-top: 10px; }
-        
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card {
-            background: white; padding: 40px; border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.03); transition: 0.4s;
-            border: 2px solid transparent;
-        }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--mint); }
-        .icon-circle { 
-            width: 70px; height: 70px; background: #e3f2fd; 
-            border-radius: 22px; display: flex; align-items: center; 
-            justify-content: center; margin-bottom: 25px; font-size: 2rem; color: var(--primary);
-        }
+.hero-inner{position:relative;z-index:1;max-width:640px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;
+  border:1.5px solid var(--border);color:var(--primary);
+  padding:7px 16px;border-radius:100px;font-size:.82rem;font-weight:600;
+  margin-bottom:28px;box-shadow:0 2px 12px rgba(0,119,204,.1)}
+.pdot{width:8px;height:8px;border-radius:50%;background:#00b94a;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
 
-        /* --- PHẦN 3: ĐĂNG KÝ (FORM) --- */
-        .registration { padding: 80px 5% 120px; }
-        .form-box {
-            max-width: 1100px; margin: 0 auto; background: white;
-            display: grid; grid-template-columns: 1fr 1.2fr;
-            border-radius: 50px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.08);
-        }
-        .form-info { background: var(--medical-grad); color: white; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
-        .form-container { padding: 60px; }
-        
-        .input-field { margin-bottom: 25px; }
-        .input-field label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #636e72; }
-        input, select { 
-            width: 100%; padding: 16px; border: 2px solid #f1f3f5; 
-            border-radius: 18px; outline: none; transition: 0.3s; font-size: 1rem;
-        }
-        input:focus { border-color: var(--primary); background: #fff; }
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);
+  font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.hero h1 .hi{display:block;background:linear-gradient(90deg,var(--primary),var(--teal));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.05rem;color:var(--muted);max-width:480px;line-height:1.75;
+  margin-bottom:38px;font-weight:300}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;padding:14px 32px;border-radius:100px;font-weight:700;font-size:.95rem;
+  cursor:pointer;border:none;font-family:'DM Sans',sans-serif;
+  box-shadow:0 6px 24px rgba(0,119,204,.35);transition:transform .2s,box-shadow .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,119,204,.45)}
+.btn-secondary{background:#fff;color:var(--primary);padding:14px 32px;border-radius:100px;
+  font-weight:600;font-size:.95rem;cursor:pointer;
+  border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);transition:all .2s}
+.btn-secondary:hover{border-color:var(--primary);box-shadow:0 4px 16px rgba(0,119,204,.15)}
 
-        .submit-btn {
-            width: 100%; padding: 20px; border: none; border-radius: 18px;
-            background: var(--text-dark); color: white; font-weight: 700;
-            font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 10px;
-        }
-        .submit-btn:hover { background: #000; transform: scale(1.02); }
+.hero-emergency{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:1}
+.emg-card{background:#fff;border:1.5px solid rgba(232,0,61,.2);border-radius:22px;
+  padding:30px 28px;text-align:center;max-width:230px;
+  box-shadow:0 8px 32px rgba(232,0,61,.12)}
+.emg-icon{font-size:2.6rem;display:block;margin-bottom:12px;animation:pulse 2s infinite}
+.emg-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;
+  color:var(--accent);margin-bottom:6px}
+.emg-card a{color:var(--accent);text-decoration:none;font-size:1.2rem;font-weight:800;letter-spacing:1px}
+.emg-card p{font-size:.75rem;color:var(--muted);margin-top:6px}
+.badge24{display:inline-block;background:rgba(232,0,61,.08);color:var(--accent);
+  font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:100px;
+  margin-top:10px;border:1px solid rgba(232,0,61,.2)}
 
-        /* --- TRANG THÀNH CÔNG --- */
-        #success-page {
-            display: none; height: 100vh; background: var(--mint);
-            align-items: center; justify-content: center; text-align: center;
-            padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
-        }
-        .success-card {
-            background: white; padding: 60px; border-radius: 60px;
-            max-width: 500px; width: 100%; box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-        }
-        .check-icon {
-            width: 100px; height: 100px; background: #e8fff5; color: #2ecc71;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 3.5rem; margin: 0 auto 30px;
-        }
-        .btn-home {
-            margin-top: 30px; display: inline-block; padding: 18px 45px;
-            background: var(--text-dark); color: white; border-radius: 20px;
-            text-decoration: none; font-weight: 700; transition: 0.3s; border: none; cursor: pointer;
-        }
-        .btn-home:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+/* STATS */
+.stats-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:28px 52px;display:flex;justify-content:center;gap:80px;
+  box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.stat{text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--primary)}
+.stat-label{font-size:.8rem;color:var(--muted);margin-top:3px}
 
-        @media (max-width: 850px) {
-            .form-box { grid-template-columns: 1fr; }
-            .form-info { padding: 40px; text-align: center; }
-            .form-container { padding: 40px; }
-            .hero { border-radius: 0 0 40px 40px; }
-        }
-    </style>
+/* SECTIONS */
+section{padding:88px 52px;position:relative;z-index:1}
+.sec-label{font-size:.75rem;font-weight:700;letter-spacing:2.5px;
+  color:var(--primary);text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);
+  font-weight:800;letter-spacing:-.8px;margin-bottom:14px}
+.sec-sub{color:var(--muted);font-size:.98rem;max-width:480px;line-height:1.75;font-weight:300}
+.sec-div{width:48px;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,var(--primary),var(--teal));margin:16px 0 0}
+
+/* INTRO */
+#intro{background:#fff}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:52px}
+.itag{display:inline-flex;align-items:center;gap:6px;background:var(--primary-pale);
+  color:var(--primary);padding:5px 14px;border-radius:8px;font-size:.78rem;font-weight:600;margin-bottom:16px}
+.intro-text h3{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:700;
+  margin-bottom:16px;letter-spacing:-.4px}
+.intro-text p{color:var(--muted);line-height:1.8;font-size:.93rem;font-weight:300;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chip{display:flex;align-items:center;gap:8px;background:var(--bg);
+  border:1px solid var(--border);padding:9px 15px;border-radius:10px;font-size:.82rem}
+.chip i{color:var(--primary);font-size:.82rem;width:14px;text-align:center}
+
+.intro-visual{position:relative;padding-bottom:20px}
+.room-card{background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  border-radius:24px;padding:36px;color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,119,204,.25)}
+.room-card::before{content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;background:rgba(255,255,255,.07);border-radius:50%}
+.room-card::after{content:'';position:absolute;bottom:-60px;left:-30px;
+  width:220px;height:220px;background:rgba(255,255,255,.05);border-radius:50%}
+.rc-icon{font-size:3rem;margin-bottom:16px;display:block;position:relative;z-index:1}
+.room-card h4{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;
+  margin-bottom:10px;position:relative;z-index:1}
+.room-card p{font-size:.88rem;line-height:1.7;opacity:.85;font-weight:300;position:relative;z-index:1}
+.fpill{position:absolute;background:#fff;border-radius:14px;padding:10px 16px;
+  font-size:.8rem;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.1);
+  display:flex;align-items:center;gap:7px}
+.fpill.top{top:-14px;right:20px;color:var(--primary)}
+.fpill.bot{bottom:-14px;left:20px;color:var(--teal)}
+
+/* SERVICES */
+#services{background:var(--bg)}
+.srv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
+.srv-card{background:#fff;border:1.5px solid var(--border);border-radius:20px;
+  padding:30px 22px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s}
+.srv-card:hover{transform:translateY(-6px);border-color:transparent}
+.srv-card:hover::after{opacity:1}
+.c1:hover{box-shadow:0 16px 48px rgba(0,119,204,.18)} .c1::after{background:linear-gradient(90deg,var(--primary),var(--teal))}
+.c2:hover{box-shadow:0 16px 48px rgba(232,0,61,.14)}  .c2::after{background:linear-gradient(90deg,var(--accent),#ff6b6b)}
+.c3:hover{box-shadow:0 16px 48px rgba(0,180,160,.15)} .c3::after{background:linear-gradient(90deg,var(--teal),#00d4bc)}
+.c4:hover{box-shadow:0 16px 48px rgba(124,58,237,.14)}.c4::after{background:linear-gradient(90deg,#7c3aed,#a855f7)}
+.srv-icon{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;
+  justify-content:center;font-size:1.4rem;margin-bottom:20px}
+.c1 .srv-icon{background:rgba(0,119,204,.1);color:var(--primary)}
+.c2 .srv-icon{background:rgba(232,0,61,.09);color:var(--accent)}
+.c3 .srv-icon{background:rgba(0,180,160,.1);color:var(--teal)}
+.c4 .srv-icon{background:rgba(124,58,237,.09);color:#7c3aed}
+.srv-card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:10px}
+.srv-card p{color:var(--muted);font-size:.84rem;line-height:1.7;font-weight:300;margin-bottom:20px}
+.srv-arr{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;transition:gap .2s}
+.c1 .srv-arr{color:var(--primary)} .c2 .srv-arr{color:var(--accent)}
+.c3 .srv-arr{color:var(--teal)}    .c4 .srv-arr{color:#7c3aed}
+.srv-card:hover .srv-arr{gap:10px}
+
+/* REGISTER */
+#register{background:linear-gradient(135deg,var(--primary) 0%,#0055aa 100%);overflow:hidden}
+#register::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17 8h6v9h9v6h-9v9h-6v-9H8v-6h9z' fill='white' fill-opacity='0.04'/%3E%3C/svg%3E");
+  background-size:60px 60px}
+#register .sec-label{color:rgba(255,255,255,.6)}
+#register .sec-title{color:#fff}
+#register .sec-sub{color:rgba(255,255,255,.65)}
+.reg-wrap{max-width:640px;margin:48px auto 0;position:relative;z-index:1}
+.form-box{background:#fff;border-radius:24px;padding:44px;box-shadow:0 24px 64px rgba(0,0,0,.2)}
+.form-box h3{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;
+  color:var(--text);margin-bottom:28px;display:flex;align-items:center;gap:10px}
+.form-box h3 i{color:var(--primary)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg{margin-bottom:18px}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:var(--muted);
+  margin-bottom:7px;letter-spacing:.2px;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);
+  border-radius:12px;padding:12px 15px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:.92rem;outline:none;transition:all .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,119,204,.12);background:#fff}
+.fg textarea{resize:vertical;min-height:110px}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted2)}
+.sub-btn{width:100%;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;padding:15px;border-radius:14px;border:none;
+  font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,119,204,.3);margin-top:6px;transition:transform .2s,box-shadow .2s}
+.sub-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,119,204,.4)}
+
+/* FOOTER */
+footer{background:#0d2340;color:#fff;padding:52px 52px 28px}
+.fg-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;margin-bottom:36px}
+.fl{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;
+  display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.fl .logo-icon{background:rgba(255,255,255,.12)}
+.fb p{color:rgba(255,255,255,.45);font-size:.84rem;line-height:1.75;font-weight:300}
+footer h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;
+  margin-bottom:14px;color:rgba(255,255,255,.9)}
+footer ul{list-style:none}
+footer li{color:rgba(255,255,255,.45);font-size:.84rem;margin-bottom:9px;
+  display:flex;align-items:center;gap:9px;font-weight:300}
+footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
+.f-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;
+  display:flex;justify-content:space-between;align-items:center}
+.f-bot p{color:rgba(255,255,255,.3);font-size:.77rem}
+
+/* DETAIL PAGE */
+.detail-page{min-height:100vh;padding:110px 52px 80px;background:var(--bg)}
+.back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--muted);
+  background:#fff;border:1.5px solid var(--border);padding:9px 20px;border-radius:100px;
+  font-size:.85rem;font-weight:500;cursor:pointer;margin-bottom:44px;
+  font-family:'DM Sans',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:all .2s}
+.back-btn:hover{color:var(--primary);border-color:var(--primary)}
+.det-hero{background:linear-gradient(135deg,var(--primary),#0055aa);border-radius:24px;
+  padding:48px;color:#fff;display:flex;align-items:flex-start;gap:28px;
+  margin-bottom:28px;position:relative;overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,119,204,.25)}
+.det-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;
+  background:rgba(255,255,255,.07);border-radius:50%}
+.det-icon{width:80px;height:80px;border-radius:20px;background:rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;font-size:2.2rem;flex-shrink:0;z-index:1;position:relative}
+.det-txt{position:relative;z-index:1}
+.det-txt h1{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3vw,2.4rem);
+  font-weight:800;letter-spacing:-.8px;margin-bottom:10px}
+.det-txt p{font-size:.97rem;line-height:1.75;opacity:.8;font-weight:300;max-width:560px}
+.det-content{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:28px}
+.det-block{background:#fff;border:1.5px solid var(--border);border-radius:20px;
+  padding:30px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.det-block h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:18px}
+.det-block ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.det-block li{display:flex;align-items:flex-start;gap:10px;
+  color:var(--muted);font-size:.88rem;font-weight:300;line-height:1.6}
+.lidot{width:20px;height:20px;border-radius:6px;background:var(--primary-pale);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.lidot i{color:var(--primary);font-size:.6rem}
+.det-cta{background:#fff;border:1.5px solid var(--border);border-radius:24px;
+  padding:44px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.det-cta h3{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:10px}
+.det-cta p{color:var(--muted);margin-bottom:26px;font-size:.93rem;font-weight:300}
+
+/* SUCCESS PAGE */
+.suc-page{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:120px 52px;text-align:center;
+  background:linear-gradient(135deg,#eaf6ff 0%,#f5fffd 100%)}
+.suc-box{max-width:540px}
+.suc-anim{width:110px;height:110px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--teal));
+  display:flex;align-items:center;justify-content:center;font-size:2.8rem;
+  margin:0 auto 30px;box-shadow:0 12px 40px rgba(0,119,204,.3);
+  animation:spop .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes spop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.suc-box h1{font-family:'Syne',sans-serif;font-size:2.3rem;font-weight:800;
+  letter-spacing:-.8px;margin-bottom:12px}
+.suc-box h1 span{color:var(--primary)}
+.suc-box>p{color:var(--muted);font-size:.97rem;line-height:1.75;font-weight:300;margin-bottom:10px}
+.ticket{background:#fff;border:1.5px solid var(--border);border-radius:20px;
+  padding:26px 28px;margin:28px 0;text-align:left;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.tkt-top{display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  padding-bottom:14px;border-bottom:1px solid var(--border)}
+.tkt-top span{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem}
+.tkt-id{margin-left:auto;background:var(--primary-pale);color:var(--primary);
+  padding:3px 10px;border-radius:6px;font-size:.75rem;font-weight:700;letter-spacing:.5px}
+.tkt-row{display:flex;justify-content:space-between;align-items:center;
+  padding:9px 0;border-bottom:1px solid var(--border);font-size:.87rem}
+.tkt-row:last-child{border-bottom:none}
+.tkt-row .lb{color:var(--muted);font-weight:300}
+.tkt-row .vl{font-weight:600}
+.sbadge{background:rgba(0,185,74,.1);color:#00a843;
+  padding:3px 10px;border-radius:6px;font-size:.78rem;font-weight:700}
+.home-btn{display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;padding:15px 38px;border-radius:100px;
+  font-family:'Syne',sans-serif;font-size:.97rem;font-weight:700;
+  cursor:pointer;border:none;box-shadow:0 8px 28px rgba(0,119,204,.35);
+  margin-top:6px;transition:transform .2s,box-shadow .2s}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,119,204,.45)}
+
+@media(max-width:960px){
+  nav{padding:14px 24px}
+  .hero{padding:100px 24px 56px;flex-direction:column}
+  .hero-emergency{position:relative;right:auto;top:auto;transform:none;margin-top:32px;width:100%}
+  .emg-card{max-width:100%}
+  .stats-strip{padding:20px 24px;gap:28px;flex-wrap:wrap}
+  section{padding:60px 24px}
+  .intro-grid{grid-template-columns:1fr;gap:36px}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .fg-grid{grid-template-columns:1fr;gap:28px}
+  .detail-page{padding:90px 24px 60px}
+  .det-content{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  footer{padding:40px 24px 20px}
+}
+@media(max-width:580px){
+  .srv-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .form-box{padding:26px 18px}
+  .det-hero{flex-direction:column;gap:18px}
+  .suc-page{padding:100px 24px}
+}
+</style>
 </head>
 <body>
 
-    <div id="main-page">
-        <nav>
-            <div class="logo"><i class="fas fa-heart-pulse"></i> HealthHub</div>
-        </nav>
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <div class="logo-icon">🏥</div>
+    School<em>Health</em>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="goSection('intro')">Giới thiệu</a></li>
+    <li><a onclick="goSection('services')">Dịch vụ</a></li>
+    <li><a onclick="goSection('register')">Đăng ký</a></li>
+  </ul>
+  <button class="nav-cta" onclick="goSection('register')">Đặt lịch ngay</button>
+</nav>
 
-        <section class="hero">
-            <div class="hero-content">
-                <span class="hero-tag">#HealthIsCool</span>
-                <h1>Stay Healthy,<br>Stay Strong.</h1>
-                <p style="opacity: 0.9; font-size: 1.2rem;">Phòng y tế hiện đại cho thế hệ mới - Nơi bạn được lắng nghe.</p>
-            </div>
-        </section>
+<!-- ════ PAGE HOME ════ -->
+<div id="page-home" class="page active">
 
-        <section class="services">
-            <div class="section-header">
-                <p style="color: var(--primary); font-weight: 800; letter-spacing: 2px;">DỊCH VỤ CỦA CHÚNG MÌNH</p>
-                <h2>Tụi mình giúp gì được bạn?</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon-circle"><i class="fas fa-medkit"></i></div>
-                    <h3>Sơ Cứu Cấp Tốc</h3>
-                    <p>Xử lý vết thương, đau bụng, nhức đầu chỉ trong tích tắc với trang bị hiện đại.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-circle"><i class="fas fa-bed"></i></div>
-                    <h3>Nghỉ Ngơi Chill</h3>
-                    <p>Giường bệnh sạch sẽ, máy lạnh mát rượi để bạn sạc lại năng lượng giữa giờ.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-circle"><i class="fas fa-comments"></i></div>
-                    <h3>Tâm Sự Gen Z</h3>
-                    <p>Nơi gỡ rối áp lực học đường và drama cùng chuyên gia tâm lý cực tâm lý.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="registration">
-            <div class="form-box">
-                <div class="form-info">
-                    <h2 style="font-size: 2.5rem;">Book lịch ngay! 🏥</h2>
-                    <p style="margin-top: 20px; line-height: 1.6; opacity: 0.9;">Đừng ngại nhé, tụi mình luôn sẵn sàng hỗ trợ bạn bất cứ lúc nào trong giờ học.</p>
-                    <div style="margin-top: 40px;">
-                        <p style="margin-bottom: 10px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> 07:30 - 17:00</p>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Tầng trệt - Khu A (Cạnh thư viện)</p>
-                    </div>
-                </div>
-                <div class="form-container">
-                    <form id="appointmentForm">
-                        <div class="input-field">
-                            <label>Tên của bạn là gì?</label>
-                            <input type="text" placeholder="Nhập họ và tên của bạn..." required>
-                        </div>
-                        <div class="input-field">
-                            <label>Bạn học lớp mấy?</label>
-                            <input type="text" placeholder="Ví dụ: 10A2, 12 Tin..." required>
-                        </div>
-                        <div class="input-field">
-                            <label>Bạn cần tụi mình giúp gì?</label>
-                            <select required>
-                                <option value="">-- Chọn vấn đề --</option>
-                                <option>Mình hơi mệt, cần nghỉ ngơi một chút</option>
-                                <option>Mình bị chấn thương / Đau người</option>
-                                <option>Mình muốn tâm sự, giải tỏa áp lực</option>
-                                <option>Khác...</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit-btn">XÁC NHẬN GỬI 🚀</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hblob hb1"></div><div class="hblob hb2"></div><div class="hblob hb3"></div>
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="pdot"></span> Đang hoạt động &nbsp;•&nbsp; T2–T6: 07:30–17:00</div>
+      <h1>Chăm sóc sức khoẻ<span class="hi">học đường tốt hơn.</span></h1>
+      <p>Phòng y tế học đường luôn sẵn sàng hỗ trợ, chăm sóc và đồng hành cùng sức khoẻ của bạn trong suốt hành trình học tập.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goSection('register')">Đăng ký khám ngay →</button>
+        <button class="btn-secondary" onclick="goSection('services')">Xem dịch vụ</button>
+      </div>
     </div>
+    <div class="hero-emergency">
+      <div class="emg-card">
+        <span class="emg-icon">🚨</span>
+        <h4>ĐƯỜNG DÂY CẤP CỨU</h4>
+        <a href="tel:0123456789">0123.456.789</a>
+        <p>Hỗ trợ khẩn cấp</p>
+        <div class="badge24">24/7 — Luôn sẵn sàng</div>
+      </div>
+    </div>
+  </section>
 
-    <div id="success-page">
-        <div class="success-card">
-            <div class="check-icon"><i class="fas fa-check"></i></div>
-            <h2 style="font-size: 2rem; color: var(--text-dark);">GỬI THÀNH CÔNG!</h2>
-            <p style="color: #636e72; margin-top: 15px; line-height: 1.6;">Yêu cầu của bạn đã "bay" thẳng tới phòng y tế. Hãy di chuyển xuống gặp tụi mình ngay nhé!</p>
-            <button class="btn-home" onclick="goBack()">QUAY VỀ TRANG CHỦ</button>
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat"><div class="stat-num">1,200+</div><div class="stat-label">Học sinh được chăm sóc</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Dịch vụ y tế chuyên nghiệp</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Phụ huynh hài lòng</div></div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Năm kinh nghiệm</div></div>
+  </div>
+
+  <!-- SECTION 1: GIỚI THIỆU -->
+  <section id="intro">
+    <div class="sec-label">Về chúng tôi</div>
+    <div class="sec-title">Phòng Y Tế Học Đường</div>
+    <div class="sec-sub">Không gian y tế hiện đại, thân thiện, được thiết kế riêng cho học sinh.</div>
+    <div class="sec-div"></div>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <div class="itag"><i class="fas fa-map-marker-alt"></i> Tầng 1 — Toà nhà A</div>
+        <h3>Nơi bạn luôn được lắng nghe & chăm sóc</h3>
+        <p>Phòng y tế học đường là nơi hỗ trợ sức khoẻ toàn diện cho học sinh. Từ những vấn đề sức khoẻ thể chất đến tâm lý, chúng tôi luôn sẵn sàng đồng hành cùng bạn.</p>
+        <p>Đội ngũ y tá và chuyên viên tư vấn giàu kinh nghiệm, trang thiết bị y tế hiện đại, đảm bảo mọi học sinh đều nhận được sự chăm sóc tốt nhất.</p>
+        <div class="chips">
+          <div class="chip"><i class="fas fa-clock"></i> T2–T6: 07:30–17:00</div>
+          <div class="chip"><i class="fas fa-clock"></i> T7: 07:30–11:30</div>
+          <div class="chip"><i class="fas fa-map-marker-alt"></i> Tầng 1, Toà A</div>
+          <div class="chip"><i class="fas fa-envelope"></i> ytehocduong@school.edu.vn</div>
         </div>
+      </div>
+      <div class="intro-visual">
+        <div class="room-card">
+          <span class="rc-icon">🏥</span>
+          <h4>Phòng Y Tế Trường THPT ABC</h4>
+          <p>Cơ sở vật chất hiện đại, trang thiết bị y tế đạt chuẩn Bộ Y Tế, nhân viên được đào tạo chuyên nghiệp và tận tâm với học sinh.</p>
+        </div>
+        <div class="fpill top"><i class="fas fa-shield-alt"></i> Đạt chuẩn Bộ Y Tế</div>
+        <div class="fpill bot"><i class="fas fa-star"></i> 5.0 ★ Phụ huynh đánh giá</div>
+      </div>
     </div>
+  </section>
 
-    <script>
-        const form = document.getElementById('appointmentForm');
-        const mainPage = document.getElementById('main-page');
-        const successPage = document.getElementById('success-page');
+  <!-- SECTION 2: DỊCH VỤ -->
+  <section id="services">
+    <div class="sec-label">Dịch vụ</div>
+    <div class="sec-title">Chúng tôi cung cấp</div>
+    <div class="sec-sub">Nhấn vào từng dịch vụ để xem thông tin chi tiết.</div>
+    <div class="sec-div"></div>
+    <div class="srv-grid">
+      <div class="srv-card c1" onclick="showService(0)">
+        <div class="srv-icon"><i class="fas fa-stethoscope"></i></div>
+        <h3>Khám Sơ Bộ</h3>
+        <p>Kiểm tra sức khoẻ định kỳ và xử lý các vấn đề sức khoẻ thông thường ngay tại trường.</p>
+        <div class="srv-arr">Xem chi tiết <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="srv-card c2" onclick="showService(1)">
+        <div class="srv-icon"><i class="fas fa-first-aid"></i></div>
+        <h3>Sơ Cấp Cứu</h3>
+        <p>Xử lý kịp thời các chấn thương và tình huống khẩn cấp, đảm bảo an toàn cho học sinh.</p>
+        <div class="srv-arr">Xem chi tiết <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="srv-card c3" onclick="showService(2)">
+        <div class="srv-icon"><i class="fas fa-pills"></i></div>
+        <h3>Cấp Phát Thuốc</h3>
+        <p>Cung cấp các loại thuốc cơ bản và hướng dẫn sử dụng theo đúng chỉ định y tế.</p>
+        <div class="srv-arr">Xem chi tiết <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="srv-card c4" onclick="showService(3)">
+        <div class="srv-icon"><i class="fas fa-brain"></i></div>
+        <h3>Tư Vấn Tâm Lý</h3>
+        <p>Hỗ trợ tâm lý, giải đáp thắc mắc về tâm sinh lý lứa tuổi học đường một cách riêng tư.</p>
+        <div class="srv-arr">Xem chi tiết <i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+  </section>
 
-        // Hiệu ứng khi nhấn Gửi
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Ẩn trang chính và hiện trang thành công
-            mainPage.style.display = 'none';
-            successPage.style.display = 'flex';
-            window.scrollTo(0, 0);
-        });
+  <!-- SECTION 3: ĐĂNG KÝ -->
+  <section id="register">
+    <div class="sec-label">Đặt lịch</div>
+    <div class="sec-title">Đăng ký khám / tư vấn</div>
+    <div class="sec-sub">Điền thông tin bên dưới, chúng tôi sẽ xác nhận lịch hẹn sớm nhất.</div>
+    <div class="sec-div" style="background:rgba(255,255,255,.3)"></div>
+    <div class="reg-wrap">
+      <div class="form-box">
+        <h3><i class="fas fa-clipboard-list"></i> Thông tin đăng ký</h3>
+        <form id="healthForm" onsubmit="handleSubmit(event)">
+          <div class="frow">
+            <div class="fg">
+              <label>Họ và tên học sinh</label>
+              <input type="text" id="fname" placeholder="Nguyễn Văn A" required/>
+            </div>
+            <div class="fg">
+              <label>Lớp</label>
+              <input type="text" id="fclass" placeholder="VD: 10A1" required/>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Dịch vụ cần đăng ký</label>
+            <select id="fservice" required>
+              <option value="" disabled selected>-- Chọn dịch vụ --</option>
+              <option>Khám Sơ Bộ</option>
+              <option>Sơ Cấp Cứu</option>
+              <option>Cấp Phát Thuốc</option>
+              <option>Tư Vấn Tâm Lý</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Lý do / Triệu chứng</label>
+            <textarea id="freason" placeholder="Mô tả tình trạng sức khoẻ của em..." required></textarea>
+          </div>
+          <button type="submit" class="sub-btn">Gửi đăng ký →</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-        // Hàm để quay lại trang chủ
-        function goBack() {
-            successPage.style.display = 'none';
-            mainPage.style.display = 'block';
-            form.reset(); // Xóa sạch dữ liệu đã nhập
-            window.scrollTo(0, 0);
-        }
-    </script>
+  <!-- FOOTER -->
+  <footer>
+    <div class="fg-grid">
+      <div class="fb">
+        <div class="fl"><div class="logo-icon">🏥</div> SchoolHealth</div>
+        <p>Đồng hành cùng sức khoẻ và sự phát triển toàn diện của học sinh Trường THPT ABC.</p>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Tầng 1, Toà nhà A, Trường THPT ABC</li>
+          <li><i class="fas fa-phone"></i> 0123.456.789</li>
+          <li><i class="fas fa-envelope"></i> ytehocduong@school.edu.vn</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Giờ làm việc</h4>
+        <ul>
+          <li><i class="fas fa-clock"></i> Thứ 2 – Thứ 6: 07:30–17:00</li>
+          <li><i class="fas fa-clock"></i> Thứ 7: 07:30–11:30</li>
+          <li><i class="fas fa-phone-alt"></i> Cấp cứu: 24/7</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <p>© 2024 SchoolHealth. All rights reserved.</p>
+      <p>Bộ Giáo Dục & Đào Tạo • Cổng Thông Tin Y Tế</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ════ PAGE SERVICE DETAIL ════ -->
+<div id="page-service" class="page">
+  <div class="detail-page">
+    <button class="back-btn" onclick="showPage('home');setTimeout(()=>scrollSec('services'),80)">
+      <i class="fas fa-arrow-left"></i> Quay lại dịch vụ
+    </button>
+    <div class="det-hero">
+      <div class="det-icon" id="det-icon"></div>
+      <div class="det-txt">
+        <h1 id="det-title"></h1>
+        <p id="det-desc"></p>
+      </div>
+    </div>
+    <div class="det-content" id="det-content"></div>
+    <div class="det-cta">
+      <h3>Muốn sử dụng dịch vụ này?</h3>
+      <p>Đăng ký ngay để được hỗ trợ kịp thời và chuyên nghiệp từ đội ngũ y tế của chúng tôi.</p>
+      <button class="btn-primary" onclick="showPage('home');setTimeout(()=>scrollSec('register'),80)">Đăng ký ngay →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PAGE SUCCESS ════ -->
+<div id="page-success" class="page">
+  <div class="suc-page">
+    <div class="suc-box">
+      <div class="suc-anim">✅</div>
+      <h1>Đăng ký <span>thành công!</span></h1>
+      <p>Yêu cầu của bạn đã được ghi nhận. Nhân viên y tế sẽ liên hệ xác nhận lịch hẹn sớm nhất.</p>
+      <div class="ticket">
+        <div class="tkt-top">
+          <i class="fas fa-clipboard-check" style="color:var(--primary)"></i>
+          <span>Phiếu đăng ký</span>
+          <div class="tkt-id" id="tkt-id"></div>
+        </div>
+        <div class="tkt-row"><span class="lb">Họ tên</span><span class="vl" id="s-name"></span></div>
+        <div class="tkt-row"><span class="lb">Lớp</span><span class="vl" id="s-class"></span></div>
+        <div class="tkt-row"><span class="lb">Dịch vụ</span><span class="vl" id="s-service"></span></div>
+        <div class="tkt-row"><span class="lb">Trạng thái</span><span class="vl"><span class="sbadge">⏳ Đang xử lý</span></span></div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted)">Cần hỗ trợ khẩn cấp? Gọi ngay: <strong style="color:var(--primary)">0123.456.789</strong></p>
+      <br/>
+      <button class="home-btn" onclick="showPage('home')">
+        <i class="fas fa-home"></i> Quay về trang chủ
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const services=[
+  {emoji:'🩺',title:'Khám Sơ Bộ',
+   desc:'Kiểm tra sức khoẻ định kỳ và xử lý các vấn đề sức khoẻ thông thường ngay tại trường học.',
+   blocks:[
+     {t:'📋 Nội dung dịch vụ',items:['Đo huyết áp, nhịp tim, nhiệt độ cơ thể','Kiểm tra thị lực và thính lực định kỳ','Tư vấn về dinh dưỡng và lối sống lành mạnh','Phát hiện sớm các bệnh lý học đường','Lập hồ sơ sức khoẻ cá nhân cho học sinh']},
+     {t:'⏱ Quy trình khám',items:['Đăng ký online hoặc trực tiếp tại phòng','Chờ đến lượt (thông thường 5–10 phút)','Bác sĩ thăm khám và ghi nhận kết quả','Nhận kết quả và tư vấn hướng xử lý','Lưu kết quả vào hồ sơ sức khoẻ cá nhân']},
+   ]},
+  {emoji:'🚑',title:'Sơ Cấp Cứu',
+   desc:'Xử lý kịp thời các chấn thương và tình huống khẩn cấp, đảm bảo an toàn tuyệt đối cho học sinh.',
+   blocks:[
+     {t:'🆘 Các tình huống xử lý',items:['Vết thương, trầy xước, chảy máu ngoài da','Bong gân, bầm tím do té ngã','Dị ứng, phản ứng thuốc nhẹ','Say nắng, mất nước, ngất xỉu','Hỗ trợ khẩn cấp trước khi chuyển viện']},
+     {t:'🔧 Trang thiết bị',items:['Tủ thuốc cấp cứu đạt chuẩn Bộ Y Tế','Băng, gạc và dụng cụ xử lý vết thương','Máy đo SpO2 và huyết áp điện tử','Cáng cứu thương và xe lăn hỗ trợ','Đường dây khẩn cấp trực 24/7']},
+   ]},
+  {emoji:'💊',title:'Cấp Phát Thuốc',
+   desc:'Cung cấp các loại thuốc cơ bản và hướng dẫn sử dụng đúng theo chỉ định y tế.',
+   blocks:[
+     {t:'💊 Thuốc được cung cấp',items:['Thuốc hạ sốt, giảm đau thông thường','Thuốc tiêu hoá, chống nôn','Thuốc nhỏ mắt, nhỏ mũi','Kem bôi, thuốc sát khuẩn ngoài da','Vitamin bổ sung theo chỉ định bác sĩ']},
+     {t:'📌 Lưu ý quan trọng',items:['Chỉ cấp phát theo chỉ định của nhân viên y tế','Học sinh dị ứng cần thông báo trước','Phụ huynh có thể gửi thuốc riêng theo đơn bác sĩ','Không tự ý dùng thuốc khi chưa được kiểm tra','Lưu hồ sơ thuốc đã dùng vào hệ thống']},
+   ]},
+  {emoji:'🧠',title:'Tư Vấn Tâm Lý',
+   desc:'Hỗ trợ tâm lý, giải đáp thắc mắc về tâm sinh lý lứa tuổi học đường trong không gian riêng tư, an toàn.',
+   blocks:[
+     {t:'💬 Nội dung tư vấn',items:['Áp lực học tập và thi cử','Vấn đề tâm sinh lý tuổi dậy thì','Căng thẳng, lo âu, trầm cảm nhẹ','Mối quan hệ bạn bè và gia đình','Định hướng nghề nghiệp và tương lai']},
+     {t:'🔒 Cam kết bảo mật',items:['100% bảo mật thông tin cá nhân','Không chia sẻ nội dung với bên thứ ba','Không gian riêng tư, an toàn, thoải mái','Chuyên viên được đào tạo chuyên nghiệp','Theo dõi và hỗ trợ liên tục nếu cần']},
+   ]},
+];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function scrollSec(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function goSection(id){
+  showPage('home');
+  setTimeout(()=>scrollSec(id),80);
+}
+function showService(i){
+  const s=services[i];
+  document.getElementById('det-icon').innerHTML=s.emoji;
+  document.getElementById('det-title').textContent=s.title;
+  document.getElementById('det-desc').textContent=s.desc;
+  document.getElementById('det-content').innerHTML=s.blocks.map(b=>`
+    <div class="det-block">
+      <h3>${b.t}</h3>
+      <ul>${b.items.map(it=>`
+        <li><div class="lidot"><i class="fas fa-check"></i></div>${it}</li>`).join('')}
+      </ul>
+    </div>`).join('');
+  showPage('service');
+}
+function handleSubmit(e){
+  e.preventDefault();
+  const name=document.getElementById('fname').value.trim();
+  const cls=document.getElementById('fclass').value.trim();
+  const svc=document.getElementById('fservice').value;
+  if(!name||!cls||!svc)return;
+  document.getElementById('s-name').textContent=name;
+  document.getElementById('s-class').textContent=cls;
+  document.getElementById('s-service').textContent=svc;
+  document.getElementById('tkt-id').textContent='#YT-'+Math.floor(1000+Math.random()*9000);
+  document.getElementById('healthForm').reset();
+  showPage('success');
+}
+</script>
 </body>
 </html>
