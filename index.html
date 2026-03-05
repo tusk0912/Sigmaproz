@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Health Hub | Trạm Sức Khỏe Gen Z</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #3a7bd5;
+            --mint: #2af598;
+            --medical-grad: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --bg-light: #f8fafc;
+            --text-dark: #2d3436;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        
+        body { background-color: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: absolute; width: 100%; padding: 30px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: white; display: flex; align-items: center; gap: 10px; }
+        .logo i { color: var(--mint); }
+
+        /* --- PHẦN 1: GIỚI THIỆU (HERO) --- */
+        .hero {
+            height: 90vh;
+            background: var(--medical-grad);
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white;
+            border-radius: 0 0 80px 80px;
+            padding: 20px;
+            position: relative;
+        }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-tag { background: rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; backdrop-filter: blur(10px); font-weight: 600; margin-bottom: 15px; display: inline-block; }
+
+        /* --- PHẦN 2: DỊCH VỤ --- */
+        .services { padding: 100px 8%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary); margin-top: 10px; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card {
+            background: white; padding: 40px; border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03); transition: 0.4s;
+            border: 2px solid transparent;
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--mint); }
+        .icon-circle { 
+            width: 70px; height: 70px; background: #e3f2fd; 
+            border-radius: 22px; display: flex; align-items: center; 
+            justify-content: center; margin-bottom: 25px; font-size: 2rem; color: var(--primary);
+        }
+
+        /* --- PHẦN 3: ĐĂNG KÝ (FORM) --- */
+        .registration { padding: 80px 5% 120px; }
+        .form-box {
+            max-width: 1100px; margin: 0 auto; background: white;
+            display: grid; grid-template-columns: 1fr 1.2fr;
+            border-radius: 50px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+        }
+        .form-info { background: var(--medical-grad); color: white; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+        .form-container { padding: 60px; }
+        
+        .input-field { margin-bottom: 25px; }
+        .input-field label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: #636e72; }
+        input, select { 
+            width: 100%; padding: 16px; border: 2px solid #f1f3f5; 
+            border-radius: 18px; outline: none; transition: 0.3s; font-size: 1rem;
+        }
+        input:focus { border-color: var(--primary); background: #fff; }
+
+        .submit-btn {
+            width: 100%; padding: 20px; border: none; border-radius: 18px;
+            background: var(--text-dark); color: white; font-weight: 700;
+            font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .submit-btn:hover { background: #000; transform: scale(1.02); }
+
+        /* --- TRANG THÀNH CÔNG --- */
+        #success-page {
+            display: none; height: 100vh; background: var(--mint);
+            align-items: center; justify-content: center; text-align: center;
+            padding: 20px; position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+        }
+        .success-card {
+            background: white; padding: 60px; border-radius: 60px;
+            max-width: 500px; width: 100%; box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+        .check-icon {
+            width: 100px; height: 100px; background: #e8fff5; color: #2ecc71;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; margin: 0 auto 30px;
+        }
+        .btn-home {
+            margin-top: 30px; display: inline-block; padding: 18px 45px;
+            background: var(--text-dark); color: white; border-radius: 20px;
+            text-decoration: none; font-weight: 700; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .btn-home:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        @media (max-width: 850px) {
+            .form-box { grid-template-columns: 1fr; }
+            .form-info { padding: 40px; text-align: center; }
+            .form-container { padding: 40px; }
+            .hero { border-radius: 0 0 40px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-page">
+        <nav>
+            <div class="logo"><i class="fas fa-heart-pulse"></i> HealthHub</div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-tag">#HealthIsCool</span>
+                <h1>Stay Healthy,<br>Stay Strong.</h1>
+                <p style="opacity: 0.9; font-size: 1.2rem;">Phòng y tế hiện đại cho thế hệ mới - Nơi bạn được lắng nghe.</p>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="section-header">
+                <p style="color: var(--primary); font-weight: 800; letter-spacing: 2px;">DỊCH VỤ CỦA CHÚNG MÌNH</p>
+                <h2>Tụi mình giúp gì được bạn?</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-circle"><i class="fas fa-medkit"></i></div>
+                    <h3>Sơ Cứu Cấp Tốc</h3>
+                    <p>Xử lý vết thương, đau bụng, nhức đầu chỉ trong tích tắc với trang bị hiện đại.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle"><i class="fas fa-bed"></i></div>
+                    <h3>Nghỉ Ngơi Chill</h3>
+                    <p>Giường bệnh sạch sẽ, máy lạnh mát rượi để bạn sạc lại năng lượng giữa giờ.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle"><i class="fas fa-comments"></i></div>
+                    <h3>Tâm Sự Gen Z</h3>
+                    <p>Nơi gỡ rối áp lực học đường và drama cùng chuyên gia tâm lý cực tâm lý.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="registration">
+            <div class="form-box">
+                <div class="form-info">
+                    <h2 style="font-size: 2.5rem;">Book lịch ngay! 🏥</h2>
+                    <p style="margin-top: 20px; line-height: 1.6; opacity: 0.9;">Đừng ngại nhé, tụi mình luôn sẵn sàng hỗ trợ bạn bất cứ lúc nào trong giờ học.</p>
+                    <div style="margin-top: 40px;">
+                        <p style="margin-bottom: 10px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> 07:30 - 17:00</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Tầng trệt - Khu A (Cạnh thư viện)</p>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <form id="appointmentForm">
+                        <div class="input-field">
+                            <label>Tên của bạn là gì?</label>
+                            <input type="text" placeholder="Nhập họ và tên của bạn..." required>
+                        </div>
+                        <div class="input-field">
+                            <label>Bạn học lớp mấy?</label>
+                            <input type="text" placeholder="Ví dụ: 10A2, 12 Tin..." required>
+                        </div>
+                        <div class="input-field">
+                            <label>Bạn cần tụi mình giúp gì?</label>
+                            <select required>
+                                <option value="">-- Chọn vấn đề --</option>
+                                <option>Mình hơi mệt, cần nghỉ ngơi một chút</option>
+                                <option>Mình bị chấn thương / Đau người</option>
+                                <option>Mình muốn tâm sự, giải tỏa áp lực</option>
+                                <option>Khác...</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">XÁC NHẬN GỬI 🚀</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="success-page">
+        <div class="success-card">
+            <div class="check-icon"><i class="fas fa-check"></i></div>
+            <h2 style="font-size: 2rem; color: var(--text-dark);">GỬI THÀNH CÔNG!</h2>
+            <p style="color: #636e72; margin-top: 15px; line-height: 1.6;">Yêu cầu của bạn đã "bay" thẳng tới phòng y tế. Hãy di chuyển xuống gặp tụi mình ngay nhé!</p>
+            <button class="btn-home" onclick="goBack()">QUAY VỀ TRANG CHỦ</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('appointmentForm');
+        const mainPage = document.getElementById('main-page');
+        const successPage = document.getElementById('success-page');
+
+        // Hiệu ứng khi nhấn Gửi
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ẩn trang chính và hiện trang thành công
+            mainPage.style.display = 'none';
+            successPage.style.display = 'flex';
+            window.scrollTo(0, 0);
+        });
+
+        // Hàm để quay lại trang chủ
+        function goBack() {
+            successPage.style.display = 'none';
+            mainPage.style.display = 'block';
+            form.reset(); // Xóa sạch dữ liệu đã nhập
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
