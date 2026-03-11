@@ -430,7 +430,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
       <div class="emg-card">
         <span class="emg-icon">🚨</span>
         <h4>ĐƯỜNG DÂY CẤP CỨU</h4>
-        <a href="tel:0123456789">0123.456.789</a>
+        <a href="tel:0920213201">0920.213.201</a>
         <p>Hỗ trợ khẩn cấp</p>
         <div class="badge24">24/7 — Luôn sẵn sàng</div>
       </div>
@@ -647,7 +647,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
         <div class="tkt-row"><span class="lb">Dịch vụ</span><span class="vl" id="s-service"></span></div>
         <div class="tkt-row"><span class="lb">Trạng thái</span><span class="vl"><span class="sbadge">⏳ Đang xử lý</span></span></div>
       </div>
-      <p style="font-size:.85rem;color:var(--muted)">Cần hỗ trợ khẩn cấp? Gọi ngay: <strong style="color:var(--primary)">0123.456.789</strong></p>
+      <p style="font-size:.85rem;color:var(--muted)">Cần hỗ trợ khẩn cấp? Gọi ngay: <strong style="color:var(--primary)">0920.213.201</strong></p>
       <br/>
       <button class="home-btn" onclick="showPage('home')">
         <i class="fas fa-home"></i> Quay về trang chủ
@@ -726,22 +726,26 @@ function handleSubmit(e){
   showPage('success');
 }
 
-// ── VISITOR COUNTER (real global count) ──
+// ── VISITOR COUNTER ──
 (function(){
   function fmt(n){ return parseInt(n).toLocaleString('vi-VN'); }
 
+  const KEY = 'sh_local_visits';
+  let local = parseInt(localStorage.getItem(KEY)) || 0;
+  local++;
+  localStorage.setItem(KEY, local);
+
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('visit-num');
+    if(el) el.textContent = fmt(local); // hiển thị local trước
 
-    // Dùng countapi.xyz để đếm lượt truy cập thật
-    fetch('https://api.countapi.xyz/hit/tusk0912.github.io/visits')
+    // thử counterapi.dev, nếu được thì dùng số thật
+    fetch('https://api.counterapi.dev/v1/tusk0912-sigmaproz/visits/up')
       .then(r => r.json())
       .then(data => {
-        if(el) el.textContent = fmt(data.value);
+        if(el && data.count) el.textContent = fmt(data.count);
       })
-      .catch(()=>{
-        if(el) el.textContent = '—';
-      });
+      .catch(()=>{}); // giữ nguyên local nếu lỗi
   });
 })();
 </script>
