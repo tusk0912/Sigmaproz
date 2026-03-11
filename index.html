@@ -248,15 +248,14 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 .f-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;
   display:flex;justify-content:space-between;align-items:center}
 .f-bot p{color:rgba(255,255,255,.3);font-size:.77rem}
-.f-visits{
-  border-top:1px solid rgba(255,255,255,.06);
-  margin-top:14px;padding-top:14px;
-  text-align:center;font-size:.8rem;
+.visits-bar{
+  background:#0a1c30;border-top:1px solid rgba(255,255,255,.06);
+  padding:12px 52px;text-align:center;font-size:.8rem;
   color:rgba(255,255,255,.35);
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.f-visits i{color:var(--teal);font-size:.8rem}
-.f-visits strong{color:rgba(255,255,255,.7);font-weight:700;font-family:'Lexend',sans-serif}
+.visits-bar i{color:var(--teal);font-size:.8rem}
+.visits-bar strong{color:rgba(255,255,255,.7);font-weight:700;font-family:'Lexend',sans-serif}
 .fv-dot{width:7px;height:7px;border-radius:50%;background:#00b94a;
   box-shadow:0 0 0 2px rgba(0,185,74,.25);animation:pulse 2s infinite;flex-shrink:0}
 
@@ -609,11 +608,6 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
       <p>© 2024 SchoolHealth — THPT Chuyên Quốc Học Huế. All rights reserved.</p>
       <p>Bộ Giáo Dục & Đào Tạo • Cổng Thông Tin Y Tế</p>
     </div>
-    <div class="f-visits">
-      <span class="fv-dot"></span>
-      <i class="fas fa-eye"></i>
-      Lượt truy cập: <strong id="visit-num">0</strong>
-    </div>
   </footer>
 </div>
 
@@ -664,6 +658,13 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
       </button>
     </div>
   </div>
+</div>
+
+<!-- ════ VISITS BAR (luôn hiển thị) ════ -->
+<div class="visits-bar">
+  <span class="fv-dot"></span>
+  <i class="fas fa-eye"></i>
+  Lượt truy cập: <strong id="visit-num">0</strong>
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
