@@ -728,21 +728,16 @@ function handleSubmit(e){
 
 // ── VISITOR COUNTER ──
 (function(){
-  let count = 0;
+  const KEY = 'sh_visits';
+  let count = parseInt(localStorage.getItem(KEY)) || 0;
+  count++;
+  localStorage.setItem(KEY, count);
+
   function fmt(n){ return n.toLocaleString('vi-VN'); }
 
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('visit-num');
-    // tăng 1 mỗi 60 giây bắt đầu từ 0
-    setInterval(()=>{
-      count++;
-      if(el){
-        el.style.transition = 'color .3s';
-        el.style.color = 'var(--teal)';
-        el.textContent = fmt(count);
-        setTimeout(()=> el.style.color = '', 600);
-      }
-    }, 60000);
+    if(el) el.textContent = fmt(count);
   });
 })();
 </script>
