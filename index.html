@@ -248,6 +248,17 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 .f-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;
   display:flex;justify-content:space-between;align-items:center}
 .f-bot p{color:rgba(255,255,255,.3);font-size:.77rem}
+.f-visits{
+  border-top:1px solid rgba(255,255,255,.06);
+  margin-top:14px;padding-top:14px;
+  text-align:center;font-size:.8rem;
+  color:rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.f-visits i{color:var(--teal);font-size:.8rem}
+.f-visits strong{color:rgba(255,255,255,.7);font-weight:700;font-family:'Lexend',sans-serif}
+.fv-dot{width:7px;height:7px;border-radius:50%;background:#00b94a;
+  box-shadow:0 0 0 2px rgba(0,185,74,.25);animation:pulse 2s infinite;flex-shrink:0}
 
 /* DETAIL PAGE */
 .detail-page{min-height:100vh;padding:110px 52px 80px;background:var(--bg)}
@@ -405,22 +416,6 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
   </ul>
   <button class="nav-cta" onclick="goSection('register')">Đặt lịch ngay</button>
 </nav>
-
-
-<!-- VISITOR WIDGET -->
-<div id="visitor-widget">
-  <div class="vw-inner">
-    <div class="vw-live">
-      <div class="vw-dot"></div>
-      <div class="vw-live-label">LIVE</div>
-    </div>
-    <div class="vw-info">
-      <div class="vw-num" id="vw-num">0</div>
-      <div class="vw-label">lượt truy cập</div>
-    </div>
-    <i class="fas fa-users vw-icon"></i>
-  </div>
-</div>
 
 <!-- ════ PAGE HOME ════ -->
 <div id="page-home" class="page active">
@@ -614,6 +609,11 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
       <p>© 2024 SchoolHealth — THPT Chuyên Quốc Học Huế. All rights reserved.</p>
       <p>Bộ Giáo Dục & Đào Tạo • Cổng Thông Tin Y Tế</p>
     </div>
+    <div class="f-visits">
+      <span class="fv-dot"></span>
+      <i class="fas fa-eye"></i>
+      Lượt truy cập: <strong id="visit-num">0</strong>
+    </div>
   </footer>
 </div>
 
@@ -735,30 +735,18 @@ function handleSubmit(e){
   showPage('success');
 }
 
-// ── VISITOR WIDGET ──
+// ── VISITOR COUNTER ──
 (function(){
   let count = 0;
-
   function fmt(n){ return n.toLocaleString('vi-VN'); }
 
-  function countUp(el, target){
-    if(!el) return;
-    let cur = 0;
-    const step = Math.ceil(target / 60);
-    const t = setInterval(()=>{
-      cur = Math.min(cur + step, target);
-      el.textContent = fmt(cur);
-      if(cur >= target) clearInterval(t);
-    }, 20);
-  }
-
   window.addEventListener('DOMContentLoaded', ()=>{
-    const el = document.getElementById('vw-num');
-
+    const el = document.getElementById('visit-num');
     // tăng 1 mỗi 60 giây bắt đầu từ 0
     setInterval(()=>{
       count++;
       if(el){
+        el.style.transition = 'color .3s';
         el.style.color = 'var(--teal)';
         el.textContent = fmt(count);
         setTimeout(()=> el.style.color = '', 600);
