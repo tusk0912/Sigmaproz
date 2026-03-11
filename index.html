@@ -726,18 +726,22 @@ function handleSubmit(e){
   showPage('success');
 }
 
-// ── VISITOR COUNTER ──
+// ── VISITOR COUNTER (real global count) ──
 (function(){
-  const KEY = 'sh_visits';
-  let count = parseInt(localStorage.getItem(KEY)) || 0;
-  count++;
-  localStorage.setItem(KEY, count);
-
-  function fmt(n){ return n.toLocaleString('vi-VN'); }
+  function fmt(n){ return parseInt(n).toLocaleString('vi-VN'); }
 
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('visit-num');
-    if(el) el.textContent = fmt(count);
+
+    // Dùng countapi.xyz để đếm lượt truy cập thật
+    fetch('https://api.countapi.xyz/hit/tusk0912.github.io/visits')
+      .then(r => r.json())
+      .then(data => {
+        if(el) el.textContent = fmt(data.value);
+      })
+      .catch(()=>{
+        if(el) el.textContent = '—';
+      });
   });
 })();
 </script>
