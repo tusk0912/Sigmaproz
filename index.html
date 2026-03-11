@@ -246,17 +246,12 @@ footer li{color:rgba(255,255,255,.45);font-size:.84rem;margin-bottom:9px;
   display:flex;align-items:center;gap:9px;font-weight:300}
 footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 .f-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;
-  display:flex;justify-content:space-between;align-items:center}
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .f-bot p{color:rgba(255,255,255,.3);font-size:.77rem}
-.visits-bar{
-  background:#0a1c30;border-top:1px solid rgba(255,255,255,.06);
-  padding:12px 52px;text-align:center;font-size:.8rem;
-  color:rgba(255,255,255,.35);
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.visits-bar i{color:var(--teal);font-size:.8rem}
-.visits-bar strong{color:rgba(255,255,255,.7);font-weight:700;font-family:'Lexend',sans-serif}
-.fv-dot{width:7px;height:7px;border-radius:50%;background:#00b94a;
+.fv-count{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.3);font-size:.77rem}
+.fv-count i{color:var(--teal);font-size:.75rem}
+.fv-count strong{color:rgba(255,255,255,.6);font-weight:700;font-family:'Lexend',sans-serif}
+.fv-dot{width:6px;height:6px;border-radius:50%;background:#00b94a;
   box-shadow:0 0 0 2px rgba(0,185,74,.25);animation:pulse 2s infinite;flex-shrink:0}
 
 /* DETAIL PAGE */
@@ -607,6 +602,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
     <div class="f-bot">
       <p>© 2024 SchoolHealth — THPT Chuyên Quốc Học Huế. All rights reserved.</p>
       <p>Bộ Giáo Dục & Đào Tạo • Cổng Thông Tin Y Tế</p>
+      <p class="fv-count"><span class="fv-dot"></span><i class="fas fa-eye"></i> Lượt truy cập: <strong id="visit-num">0</strong></p>
     </div>
   </footer>
 </div>
@@ -660,12 +656,6 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
   </div>
 </div>
 
-<!-- ════ VISITS BAR (luôn hiển thị) ════ -->
-<div class="visits-bar">
-  <span class="fv-dot"></span>
-  <i class="fas fa-eye"></i>
-  Lượt truy cập: <strong id="visit-num">0</strong>
-</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const services=[
