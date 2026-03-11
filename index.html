@@ -737,11 +737,7 @@ function handleSubmit(e){
 
 // ── VISITOR WIDGET ──
 (function(){
-  const KEY = 'sh_visits';
-  const SEED = 3847;
-  let total = parseInt(localStorage.getItem(KEY)) || SEED;
-  total++;
-  localStorage.setItem(KEY, total);
+  let count = 0;
 
   function fmt(n){ return n.toLocaleString('vi-VN'); }
 
@@ -758,15 +754,13 @@ function handleSubmit(e){
 
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('vw-num');
-    setTimeout(()=> countUp(el, total), 500);
 
-    // tăng 1 mỗi 60 giây
+    // tăng 1 mỗi 60 giây bắt đầu từ 0
     setInterval(()=>{
-      total++;
-      localStorage.setItem(KEY, total);
+      count++;
       if(el){
         el.style.color = 'var(--teal)';
-        el.textContent = fmt(total);
+        el.textContent = fmt(count);
         setTimeout(()=> el.style.color = '', 600);
       }
     }, 60000);
