@@ -729,23 +729,12 @@ function handleSubmit(e){
 // ── VISITOR COUNTER ──
 (function(){
   function fmt(n){ return parseInt(n).toLocaleString('vi-VN'); }
-
-  const KEY = 'sh_local_visits';
-  let local = parseInt(localStorage.getItem(KEY)) || 0;
-  local++;
-  localStorage.setItem(KEY, local);
-
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('visit-num');
-    if(el) el.textContent = fmt(local); // hiển thị local trước
-
-    // thử counterapi.dev, nếu được thì dùng số thật
-    fetch('https://api.counterapi.dev/v1/tusk0912-sigmaproz/visits/up')
+    fetch('https://api.counterapi.dev/v1/tusk0912.github.io/visits/up')
       .then(r => r.json())
-      .then(data => {
-        if(el && data.count) el.textContent = fmt(data.count);
-      })
-      .catch(()=>{}); // giữ nguyên local nếu lỗi
+      .then(data => { if(el) el.textContent = fmt(data.count); })
+      .catch(()=>{ if(el) el.textContent = '—'; });
   });
 })();
 </script>
