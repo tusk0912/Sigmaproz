@@ -419,7 +419,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
     <div class="hblob hb1"></div><div class="hblob hb2"></div><div class="hblob hb3"></div>
     <div class="hero-inner">
       <div class="hero-badge"><span class="pdot"></span> Đang hoạt động &nbsp;•&nbsp; T2–T7: 07:00–17:00</div>
-      <h1>Chăm sóc sức khoẻ học đường</h1>
+      <h1>Chăm sóc sức khoẻ học đường.</h1>
       <p>Phòng y tế học đường luôn sẵn sàng hỗ trợ, chăm sóc và đồng hành cùng sức khoẻ của bạn trong suốt hành trình học tập.</p>
       <div class="hero-btns">
         <button class="btn-primary" onclick="goSection('register')">Đăng ký khám ngay →</button>
@@ -460,7 +460,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
           <div class="chip"><i class="fas fa-clock"></i> T2–T7: 07:00–17:00</div>
           <div class="chip"><i class="fas fa-phone-alt"></i> 0920.213.201</div>
           <div class="chip"><i class="fas fa-map-marker-alt"></i> 12 Lê Lợi, TP. Huế</div>
-          <div class="chip"><i class="fas fa-envelope"></i> ytehocduong12li2@gmail.com</div>
+          <div class="chip"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="047d70616c6b6760716b6a633536686d36446369656d682a676b69">[email&#160;protected]</a></div>
         </div>
       </div>
       <div class="intro-visual">
@@ -560,7 +560,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> 12 Lê Lợi, TP. Huế, Thừa Thiên Huế</li>
           <li><i class="fas fa-phone"></i> 0920.213.201</li>
-          <li><i class="fas fa-envelope"></i> ytehocduong12li2@gmail.com</li>
+          <li><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ff6fbeae7e0ecebfae0e1e8bebde3e6bdcfe8e2eee6e3a1ece0e2">[email&#160;protected]</a></li>
         </ul>
       </div>
       <div>
@@ -578,12 +578,12 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
       <div class="credits-grid">
         <div class="credit-card">
           <div class="credit-icon">✍️</div>
-          <div class="credit-name">Trần Thị Thủy Tiên</div>
+          <div class="credit-name">Hà Trần Thu Ngân</div>
           <div class="credit-role">Thiết kế nội dung</div>
         </div>
         <div class="credit-card">
           <div class="credit-icon">🎨</div>
-          <div class="credit-name">Hà Trần Thu Ngân</div>
+          <div class="credit-name">Trần Thị Thuỷ Tiên</div>
           <div class="credit-role">Thiết kế hình ảnh</div>
         </div>
         <div class="credit-card">
@@ -657,7 +657,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 </div>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const services=[
   {emoji:'🩺',title:'Khám Sơ Bộ',
    desc:'Kiểm tra sức khoẻ định kỳ và xử lý các vấn đề sức khoẻ thông thường ngay tại trường học.',
@@ -727,14 +727,15 @@ function handleSubmit(e){
 }
 
 // ── VISITOR COUNTER ──
+// ── VISITOR COUNTER ──
 (function(){
   function fmt(n){ return parseInt(n).toLocaleString('vi-VN'); }
   window.addEventListener('DOMContentLoaded', ()=>{
     const el = document.getElementById('visit-num');
-    fetch('https://api.counterapi.dev/v1/tusk0912.github.io/visits/up')
+    fetch('https://api.counterapi.dev/v1/sigmaproz/pageviews/up')
       .then(r => r.json())
-      .then(data => { if(el) el.textContent = fmt(data.count); })
-      .catch(()=>{ if(el) el.textContent = '—'; });
+      .then(data => { if(el && data.count) el.textContent = fmt(data.count); })
+      .catch(()=>{ if(el) el.textContent = el.textContent || '—'; });
   });
 })();
 </script>
