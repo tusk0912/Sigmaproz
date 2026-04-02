@@ -96,22 +96,22 @@ nav{position:fixed;top:0;width:100%;z-index:200;
 
 .hero-emergency{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:1}
 .emg-card{background:#fff;border:1.5px solid rgba(232,0,61,.15);border-radius:22px;
-  padding:22px 20px;text-align:left;max-width:260px;
+  padding:18px 18px;text-align:left;max-width:360px;width:360px;
   box-shadow:0 8px 32px rgba(232,0,61,.1)}
-.emg-card-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;
-  padding-bottom:12px;border-bottom:1px solid rgba(232,0,61,.12)}
+.emg-card-title{display:flex;align-items:center;gap:8px;margin-bottom:12px;
+  padding-bottom:10px;border-bottom:1px solid rgba(232,0,61,.12)}
 .emg-card-title span{font-family:'Lexend',sans-serif;font-size:.9rem;font-weight:800;color:var(--accent)}
 .news-tag{font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
   background:rgba(232,0,61,.08);color:var(--accent);padding:2px 8px;border-radius:100px;
   border:1px solid rgba(232,0,61,.2);white-space:nowrap}
+.news-frame{width:100%;height:360px;border:none;border-radius:12px;
+  overflow:hidden;display:block;}
+.news-open{display:block;text-align:center;margin-top:10px;font-size:.78rem;
+  color:var(--primary);text-decoration:none;font-weight:600;}
+.news-open:hover{text-decoration:underline}
 .news-item{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;padding-bottom:12px;
   border-bottom:1px solid var(--border)}
 .news-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.news-cat{font-size:.65rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;
-  border-radius:4px;display:inline-block;margin-bottom:2px}
-.news-cat.alert{background:rgba(232,0,61,.08);color:var(--accent)}
-.news-cat.info{background:rgba(0,119,204,.08);color:var(--primary)}
-.news-cat.guide{background:rgba(0,180,160,.08);color:var(--teal)}
 .news-item p{font-size:.78rem;color:var(--text);line-height:1.5;font-weight:400}
 .news-item time{font-size:.68rem;color:var(--muted2)}
 
@@ -459,11 +459,16 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
           <span>📰 Bản tin sức khoẻ</span>
           <span class="news-tag">VnExpress</span>
         </div>
-        <div id="vnexpress-news">
-          <div style="text-align:center;padding:20px 0;color:var(--muted);font-size:.82rem">
-            <i class="fas fa-spinner fa-spin"></i> Đang tải bản tin...
-          </div>
-        </div>
+        <iframe
+          class="news-frame"
+          src="https://vnexpress.net/suc-khoe"
+          title="Tin tức sức khoẻ VnExpress"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-top-navigation">
+        </iframe>
+        <a class="news-open" href="https://vnexpress.net/suc-khoe" target="_blank">
+          <i class="fas fa-external-link-alt"></i> Mở VnExpress Sức khoẻ →
+        </a>
       </div>
     </div>
   </section>
@@ -762,37 +767,6 @@ function handleSubmit(e){
   showPage('success');
 }
 
-// ── VNEXPRESS NEWS ──
-(function(){
-  const container = document.getElementById('vnexpress-news');
-  if(!container) return;
-  const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://vnexpress.net/rss/suc-khoe.rss');
-  fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
-      const items = [...xml.querySelectorAll('item')].slice(0,3);
-      if(!items.length) throw new Error();
-      container.innerHTML = items.map(item => {
-        const title = item.querySelector('title').textContent;
-        const link  = item.querySelector('link').nextSibling.textContent.trim();
-        const date  = new Date(item.querySelector('pubDate').textContent).toLocaleDateString('vi-VN');
-        return `<div class="news-item">
-          <a href="${link}" target="_blank" style="text-decoration:none">
-            <p style="color:var(--text);font-weight:500">${title}</p>
-            <time>${date} · VnExpress</time>
-          </a>
-        </div>`;
-      }).join('');
-    })
-    .catch(()=>{
-      container.innerHTML = `<div class="news-item">
-        <p style="color:var(--muted);font-size:.78rem">Không tải được bản tin.</p>
-        <a href="https://vnexpress.net/suc-khoe" target="_blank"
-          style="font-size:.72rem;color:var(--primary)">Xem tại VnExpress →</a>
-      </div>`;
-    });
-})();
 
 // ── VISITOR COUNTER ──
 (function(){
