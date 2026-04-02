@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SchoolHealth — Phòng Y Tế Học Đường</title>
+<title>Y Tế Học Đường — THPT Chuyên Quốc Học Huế</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
@@ -75,8 +75,9 @@ nav{position:fixed;top:0;width:100%;z-index:200;
 .pdot{width:8px;height:8px;border-radius:50%;background:#00b94a;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
 
-.hero h1{font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);
-  font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.hero h1{font-family:'Lexend',sans-serif;font-size:clamp(1rem,3.2vw,3rem);
+  font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:20px;
+  white-space:nowrap}
 .hero h1 .hi{display:block;background:linear-gradient(90deg,var(--primary),var(--teal));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{font-size:1.05rem;color:var(--muted);max-width:480px;line-height:1.75;
@@ -94,18 +95,43 @@ nav{position:fixed;top:0;width:100%;z-index:200;
 .btn-secondary:hover{border-color:var(--primary);box-shadow:0 4px 16px rgba(0,119,204,.15)}
 
 .hero-emergency{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:1}
-.emg-card{background:#fff;border:1.5px solid rgba(232,0,61,.2);border-radius:22px;
-  padding:30px 28px;text-align:center;max-width:230px;
-  box-shadow:0 8px 32px rgba(232,0,61,.12)}
-.emg-icon{font-size:2.6rem;display:block;margin-bottom:12px;animation:pulse 2s infinite}
-.emg-card h4{font-family:'Lexend',sans-serif;font-size:.95rem;font-weight:700;
-  color:var(--accent);margin-bottom:6px}
-.emg-card a{color:var(--accent);text-decoration:none;font-size:1.2rem;font-weight:800;letter-spacing:1px}
-.emg-card p{font-size:.75rem;color:var(--muted);margin-top:6px}
-.badge24{display:inline-block;background:rgba(232,0,61,.08);color:var(--accent);
-  font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:100px;
-  margin-top:10px;border:1px solid rgba(232,0,61,.2)}
+.emg-card{background:#fff;border:1.5px solid rgba(232,0,61,.15);border-radius:22px;
+  padding:22px 20px;text-align:left;max-width:260px;
+  box-shadow:0 8px 32px rgba(232,0,61,.1)}
+.emg-card-title{display:flex;align-items:center;gap:8px;margin-bottom:14px;
+  padding-bottom:12px;border-bottom:1px solid rgba(232,0,61,.12)}
+.emg-card-title span{font-family:'Lexend',sans-serif;font-size:.9rem;font-weight:800;color:var(--accent)}
+.news-tag{font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  background:rgba(232,0,61,.08);color:var(--accent);padding:2px 8px;border-radius:100px;
+  border:1px solid rgba(232,0,61,.2);white-space:nowrap}
+.news-item{display:flex;flex-direction:column;gap:4px;margin-bottom:12px;padding-bottom:12px;
+  border-bottom:1px solid var(--border)}
+.news-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.news-cat{font-size:.65rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;
+  border-radius:4px;display:inline-block;margin-bottom:2px}
+.news-cat.alert{background:rgba(232,0,61,.08);color:var(--accent)}
+.news-cat.info{background:rgba(0,119,204,.08);color:var(--primary)}
+.news-cat.guide{background:rgba(0,180,160,.08);color:var(--teal)}
+.news-item p{font-size:.78rem;color:var(--text);line-height:1.5;font-weight:400}
+.news-item time{font-size:.68rem;color:var(--muted2)}
 
+/* 115 hotline fixed button */
+.hotline-115{
+  position:fixed;bottom:28px;left:28px;z-index:300;
+  display:flex;align-items:center;gap:10px;
+  background:var(--accent);color:#fff;
+  padding:12px 20px;border-radius:100px;
+  font-family:'Lexend',sans-serif;font-weight:700;font-size:.9rem;
+  text-decoration:none;box-shadow:0 6px 24px rgba(232,0,61,.35);
+  animation:pulse115 2s ease-in-out infinite;
+  transition:transform .2s,box-shadow .2s;
+}
+.hotline-115:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(232,0,61,.45)}
+.hotline-115 i{font-size:1rem}
+@keyframes pulse115{
+  0%,100%{box-shadow:0 6px 24px rgba(232,0,61,.35)}
+  50%{box-shadow:0 6px 32px rgba(232,0,61,.6)}
+}
 
 /* STATS */
 .stats-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
@@ -342,7 +368,8 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 .credit-name{font-family:'Lexend',sans-serif;font-size:.85rem;font-weight:600;
   color:rgba(255,255,255,.88);margin-bottom:4px}
 .credit-role{font-size:.75rem;color:var(--teal);font-weight:400}
-@media(max-width:960px){.credits-grid{grid-template-columns:1fr 1fr}}
+
+@media(max-width:680px){.credits-grid{grid-template-columns:1fr 1fr}}
 
 
   nav{padding:14px 24px}
@@ -358,7 +385,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
   .det-content{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
   footer{padding:40px 24px 20px}
-
+}
 @media(max-width:580px){
   .srv-grid{grid-template-columns:1fr}
   .nav-links{display:none}
@@ -401,7 +428,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 <nav>
   <div class="logo" onclick="showPage('home')">
     <div class="logo-icon">🏥</div>
-    School<em>Health</em>
+    Y Tế <em>Học Đường</em>
   </div>
   <ul class="nav-links">
     <li><a onclick="goSection('intro')">Giới thiệu</a></li>
@@ -428,14 +455,23 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
     </div>
     <div class="hero-emergency">
       <div class="emg-card">
-        <span class="emg-icon">🚨</span>
-        <h4>ĐƯỜNG DÂY CẤP CỨU</h4>
-        <a href="tel:0920213201">0920.213.201</a>
-        <p>Hỗ trợ khẩn cấp</p>
-        <div class="badge24">24/7 — Luôn sẵn sàng</div>
+        <div class="emg-card-title">
+          <span>📰 Bản tin sức khoẻ</span>
+          <span class="news-tag">VnExpress</span>
+        </div>
+        <div id="vnexpress-news">
+          <div style="text-align:center;padding:20px 0;color:var(--muted);font-size:.82rem">
+            <i class="fas fa-spinner fa-spin"></i> Đang tải bản tin...
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- 115 HOTLINE -->
+  <a class="hotline-115" href="tel:115">
+    <i class="fas fa-phone-alt"></i> Cấp cứu 115
+  </a>
 
   <!-- STATS -->
   <div class="stats-strip">
@@ -460,7 +496,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
           <div class="chip"><i class="fas fa-clock"></i> T2–T7: 07:00–17:00</div>
           <div class="chip"><i class="fas fa-phone-alt"></i> 0920.213.201</div>
           <div class="chip"><i class="fas fa-map-marker-alt"></i> 12 Lê Lợi, TP. Huế</div>
-          <div class="chip"><i class="fas fa-envelope"></i> <a href="https://thpt-qhoc.thuathienhue.edu.vn/thong-bao&cpage=3" target="_blank" style="color:inherit;text-decoration:none">QUOC HOC HUE</a></div>
+          <div class="chip"><i class="fas fa-envelope"></i> <a href="https://thptchuyenquochoc.edu.vn" target="_blank" style="color:inherit;text-decoration:none"><span class="__cf_email__" data-cfemail="ed94998885828e899882838adcdf8184dfad8a808c8481c38e8280">[email&#160;protected]</span></a></div>
         </div>
       </div>
       <div class="intro-visual">
@@ -552,7 +588,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
   <footer>
     <div class="fg-grid">
       <div class="fb">
-        <div class="fl"><div class="logo-icon">🏥</div> SchoolHealth</div>
+        <div class="fl"><div class="logo-icon">🏥</div> Y Tế Học Đường</div>
         <p>Đồng hành cùng sức khoẻ và sự phát triển toàn diện của học sinh Trường THPT Chuyên Quốc Học Huế.</p>
       </div>
       <div>
@@ -560,7 +596,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
         <ul>
           <li><i class="fas fa-map-marker-alt"></i> 12 Lê Lợi, TP. Huế, Thừa Thiên Huế</li>
           <li><i class="fas fa-phone"></i> 0920.213.201</li>
-          <li><i class="fas fa-envelope"></i> <a href="https://thpt-qhoc.thuathienhue.edu.vn/thong-bao&cpage=3" target="_blank" style="color:inherit;text-decoration:none">QUOC HOC HUE</a></li>
+          <li><i class="fas fa-envelope"></i> <a href="https://thptchuyenquochoc.edu.vn" target="_blank" style="color:inherit;text-decoration:none"><span class="__cf_email__" data-cfemail="c2bbb6a7aaada1a6b7adaca5f3f0aeabf082a5afa3abaeeca1adaf">[email&#160;protected]</span></a></li>
         </ul>
       </div>
       <div>
@@ -600,7 +636,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
     </div>
 
     <div class="f-bot">
-      <p>© 2024 SchoolHealth — THPT Chuyên Quốc Học Huế. All rights reserved.</p>
+      <p>© 2024 Y Tế Học Đường — THPT Chuyên Quốc Học Huế. All rights reserved.</p>
       <p>Bộ Giáo Dục & Đào Tạo • Cổng Thông Tin Y Tế</p>
       <p class="fv-count"><span class="fv-dot"></span><i class="fas fa-eye"></i> Lượt truy cập: <strong id="visit-num">0</strong></p>
     </div>
@@ -657,7 +693,7 @@ footer li i{color:var(--teal);font-size:.8rem;width:14px;text-align:center}
 </div>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const services=[
   {emoji:'🩺',title:'Khám Sơ Bộ',
    desc:'Kiểm tra sức khoẻ định kỳ và xử lý các vấn đề sức khoẻ thông thường ngay tại trường học.',
@@ -726,18 +762,40 @@ function handleSubmit(e){
   showPage('success');
 }
 
-// ── VISITOR COUNTER ──
+// ── VNEXPRESS NEWS ──
+(function(){
+  const container = document.getElementById('vnexpress-news');
+  if(!container) return;
+  const url = 'https://api.allorigins.win/get?url=' + encodeURIComponent('https://vnexpress.net/rss/suc-khoe.rss');
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+      const items = [...xml.querySelectorAll('item')].slice(0,3);
+      if(!items.length) throw new Error();
+      container.innerHTML = items.map(item => {
+        const title = item.querySelector('title').textContent;
+        const link  = item.querySelector('link').nextSibling.textContent.trim();
+        const date  = new Date(item.querySelector('pubDate').textContent).toLocaleDateString('vi-VN');
+        return `<div class="news-item">
+          <a href="${link}" target="_blank" style="text-decoration:none">
+            <p style="color:var(--text);font-weight:500">${title}</p>
+            <time>${date} · VnExpress</time>
+          </a>
+        </div>`;
+      }).join('');
+    })
+    .catch(()=>{
+      container.innerHTML = `<div class="news-item">
+        <p style="color:var(--muted);font-size:.78rem">Không tải được bản tin.</p>
+        <a href="https://vnexpress.net/suc-khoe" target="_blank"
+          style="font-size:.72rem;color:var(--primary)">Xem tại VnExpress →</a>
+      </div>`;
+    });
+})();
+
 // ── VISITOR COUNTER ──
 (function(){
   function fmt(n){ return parseInt(n).toLocaleString('vi-VN'); }
   window.addEventListener('DOMContentLoaded', ()=>{
-    const el = document.getElementById('visit-num');
-    fetch('https://api.counterapi.dev/v1/sigmaproz/pageviews/up')
-      .then(r => r.json())
-      .then(data => { if(el && data.count) el.textContent = fmt(data.count); })
-      .catch(()=>{ if(el) el.textContent = el.textContent || '—'; });
-  });
-})();
-</script>
-</body>
-</html>
+    const el = document.get
