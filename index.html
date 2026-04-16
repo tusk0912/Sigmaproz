@@ -192,22 +192,31 @@
         <section id="register" class="reg-section">
             <div class="section-title"><h2>Đăng ký hỗ trợ</h2><div class="divider"></div></div>
             <div class="reg-container">
-                <form onsubmit="alert('Yêu cầu đã được gửi đến phòng y tế!'); return false;">
-                    <div class="form-row">
-                        <div class="form-group"><label>Họ và tên</label><input type="text" placeholder="Nguyễn Văn A" required></div>
-                        <div class="form-group"><label>Lớp học</label><input type="text" placeholder="12 Tin" required></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Dịch vụ cần hỗ trợ</label>
-                        <select>
-                            <option>Tư vấn tâm lý</option>
-                            <option>Khám sức khỏe</option>
-                            <option>Báo cáo dịch bệnh</option>
-                        </select>
-                    </div>
-                    <div class="form-group"><label>Mô tả chi tiết</label><textarea rows="3" placeholder="Nhập tình trạng của bạn..."></textarea></div>
-                    <button type="submit" class="btn-send">GỬI YÊU CẦU</button>
-                </form>
+                <form id="healthForm">
+    <div class="form-row">
+        <div class="form-group">
+            <label>Họ và tên</label>
+            <input type="text" id="senderName" placeholder="Nguyễn Văn A" required>
+        </div>
+        <div class="form-group">
+            <label>Lớp học</label>
+            <input type="text" id="senderClass" placeholder="12 Tin" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Loại dịch vụ cần hỗ trợ</label>
+        <select id="serviceType">
+            <option>Đặt lịch tư vấn tâm lý cá nhân</option>
+            <option>Yêu cầu khám sức khỏe định kỳ</option>
+            <option>Báo cáo tình hình dịch bệnh tại lớp</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Mô tả chi tiết triệu chứng / Yêu cầu</label>
+        <textarea id="message" rows="4" placeholder="Ví dụ: Em cảm thấy mệt mỏi..."></textarea>
+    </div>
+    <button type="submit" class="btn-send">GỬI YÊU CẦU ĐẾN PHÒNG Y TẾ</button>
+</form>
             </div>
         </section>
 
@@ -313,6 +322,18 @@
             `;
             showPage('detail-page');
         }
+        document.getElementById('healthForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Ngăn trang web tải lại khi nhấn gửi
+
+    // Lấy tên học sinh để hiện thông báo cá nhân hóa
+    const name = document.getElementById('senderName').value;
+
+    // Hiển thị thông báo (Bạn có thể dùng alert hoặc tạo một thông báo đẹp hơn)
+    alert(`Chúc mừng ${name}! Yêu cầu hỗ trợ y tế của bạn đã được gửi thành công. Cán bộ y tế sẽ phản hồi sớm nhất.`);
+
+    // Xóa sạch dữ liệu đã nhập trong form sau khi gửi thành công
+    this.reset();
+});
     </script>
 </body>
 </html>
